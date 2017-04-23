@@ -1,14 +1,12 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-card *ngFor="let event of events">
+    <ion-card-header>
+      {{ event.summary }}
+      <ion-note>{{ event.start.dateTime }}</ion-note>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ event.description }}</p>
+      <ion-note>{{ event.location }}</ion-note>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
