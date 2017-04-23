@@ -19,25 +19,24 @@ export class HomePage {
         "offline": true
       })
       .then(login => {
-          let body = new URLSearchParams();
-          body.set("code", login.serverAuthCode);
-          body.set("client_id", clientId);
-          body.set("client_secret", "TEyKwBgPFmIx8rftqYRxj6Kb");
-          body.set("grant_type", "authorization_code");
-          http
-            .post("https://www.googleapis.com/oauth2/v4/token", body)
-            .subscribe(token => http
-              .get(
-                "https://www.googleapis.com/calendar/v3/calendars/sira20nselu48ng0e3udi9tpe8@group.calendar.google.com/events"
-                + "?singleEvents=true"
-                + "&orderBy=startTime"
-                + `&timeMin=${new Date().toISOString()}`,
-                {headers: new Headers({"Authorization": `Bearer ${token.json().access_token}`})}
-              )
-              .subscribe(events => console.log(this.events = events.json().items))
+        let body = new URLSearchParams();
+        body.set("code", login.serverAuthCode);
+        body.set("client_id", clientId);
+        body.set("client_secret", "TEyKwBgPFmIx8rftqYRxj6Kb");
+        body.set("grant_type", "authorization_code");
+        http
+          .post("https://www.googleapis.com/oauth2/v4/token", body)
+          .subscribe(token => http
+            .get(
+              "https://www.googleapis.com/calendar/v3/calendars/sira20nselu48ng0e3udi9tpe8@group.calendar.google.com/events"
+              + "?singleEvents=true"
+              + "&orderBy=startTime"
+              + `&timeMin=${new Date().toISOString()}`,
+              {headers: new Headers({"Authorization": `Bearer ${token.json().access_token}`})}
             )
-        }
-      )
+            .subscribe(events => console.log(this.events = events.json().items))
+          )
+      })
   }
 
 }
